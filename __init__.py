@@ -20,13 +20,14 @@ Created by Samy Tichadou
 
 bl_info = {
     "name": "GP Material Checker",
-    "description": "Handy reload for Image Textures and Linked Libraries",
-    "author": "Samy TIchadou (tonton), RenFinkle",
+    "description": "Blender addon to check all available GP materials in a glimpse",
+    "author": "Samy Tichadou (tonton)",
     "version": (0, 1, 0),
-    "blender": (2, 80, 0),
-    "location": "Properties > Scene",
-    "wiki_url": "https://github.com/samytichadou/Auto_Reload_Images-Blender_addon",
-    "tracker_url": "https://github.com/samytichadou/Auto_Reload_Images-Blender_addon/issues/new",
+    "blender": (2, 91, 2),
+    "location": "Sidebar > Grease Pencil > Grease Pencil Tools",
+    "warning": "",
+    "doc_url": "https://github.com/samytichadou/gp_material_checker",
+    "tracker_url": "https://github.com/samytichadou/gp_material_checker/issues/new",
     "category": "Object" }
 
 import bpy
