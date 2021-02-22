@@ -1,15 +1,51 @@
 import bpy
 
 
-# draw function
-def gpmc_draw_checker(layout):
+# return selected object materials
+def gpmc_return_materials_from_objects(scene):
 
-    col = layout.column(align=True)
+    mat = []
+
+    for ob in scene.objects:
+        if ob.type == "GPENCIL" and ob.select_get():
+            for ms in ob.material_slots:
+                if ms.material.is_grease_pencil:
+                    if ms.material not in mat:
+                        mat.append(ms.material)
+
+    return mat
+
+
+# return gp materials
+def gpmc_return_gp_materials():
+
+    mat = []
 
     for m in bpy.data.materials:
         if m.is_grease_pencil:
+            mat.append(m)
+
+    mat = sorted(mat, key=lambda x: x.name, reverse=False)
+
+    return mat
+
+
+# draw function
+def gpmc_draw_checker(layout, context):
+
+    scn = context.scene
+    layout.prop(scn, "gpmc_selected_only")
+
+    col = layout.column(align=True)
+
+    if scn.gpmc_selected_only:
+        mat = gpmc_return_materials_from_objects(scn)
+    else:
+        mat = gpmc_return_gp_materials()
+        
+    for m in mat:
+        if m.is_grease_pencil:
             gp = m.grease_pencil
-            
             
             box = col.box()
             
@@ -53,7 +89,7 @@ class GP_OT_materialchecker_popup_operator(bpy.types.Operator):
         return context.window_manager.invoke_props_dialog(self, width=400)
  
     def draw(self, context):
-        gpmc_draw_checker(self.layout)
+        gpmc_draw_checker(self.layout, context)
 
     def execute(self, context):
         return {'FINISHED'}
@@ -73,8 +109,8 @@ class GP_PT_material_checker(bpy.types.Panel):
     def draw(self, context):
         layout = self.layout
         
-        layout.operator("gp.popup_operator", text="Popup")
-        gpmc_draw_checker(self.layout)
+        #layout.operator("gp.popup_operator", text="Popup")
+        gpmc_draw_checker(self.layout, context)
 
 
 ### REGISTER ---

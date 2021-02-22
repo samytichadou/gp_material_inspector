@@ -50,6 +50,9 @@ def register():
     addon_prefs.register()
     gui.register()
 
+    bpy.types.Scene.gpmc_selected_only = \
+        bpy.props.BoolProperty(name = "Selected Only", default = True)
+
     ## update tab name with update in pref file (passing addon_prefs)
     addon_prefs.update_panel(addon_prefs.get_addon_preferences(), bpy.context)
 
@@ -58,3 +61,5 @@ def unregister():
 
     addon_prefs.unregister()
     gui.unregister()
+
+    del bpy.types.Scene.gpmc_selected_only
