@@ -56,6 +56,9 @@ def register():
     bpy.types.Material.gpmi_show_details = \
         bpy.props.BoolProperty(name = "Show Details", default = False)
 
+    bpy.types.Object.gpmi_show_materials = \
+        bpy.props.BoolProperty(name = "Show Materials", default = False)
+
     ## update tab name with update in pref file (passing addon_prefs)
     addon_prefs.update_panel(addon_prefs.get_addon_preferences(), bpy.context)
 
@@ -67,3 +70,4 @@ def unregister():
 
     del bpy.types.Scene.gpmi_selected_only
     del bpy.types.Material.gpmi_show_details
+    del bpy.types.Object.gpmi_show_materials

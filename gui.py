@@ -91,23 +91,26 @@ def gpmi_draw_checker(layout, context):
 
     col = layout.column(align=True)
 
-    if scn.gpmi_selected_only:
-        chk_first = False
-        for ob in bpy.data.objects:
-            if ob.type == "GPENCIL" and ob.select_get():
+    for ob in bpy.data.objects:
+        if ob.type == "GPENCIL":
+            
+            if scn.gpmi_selected_only and ob.select_get() \
+            or not scn.gpmi_selected_only:
+
                 mat = gpmi_return_materials_from_object(ob)
                 if mat:
-                    if chk_first:
-                        col.separator()
-                    col.label(text=ob.name, icon="MESH_CUBE")
-                    chk_first = True
-                    for m in mat:
-                        gpmi_draw_material(m, col)
+                    if ob.gpmi_show_materials:
+                        icon_show = "DISCLOSURE_TRI_DOWN"
+                    else:
+                        icon_show = "DISCLOSURE_TRI_RIGHT"
+                    
+                    row = col.row(align=True)
+                    row.prop(ob, "gpmi_show_materials", text="", icon=icon_show, emboss=False)
+                    row.label(text=ob.name, icon="MESH_CUBE")
 
-    else:
-        mat = gpmi_return_gp_materials()
-        for m in mat:
-            gpmi_draw_material(m, col)
+                    if ob.gpmi_show_materials:
+                        for m in mat:
+                            gpmi_draw_material(m, col)
 
 
 # popup operator
