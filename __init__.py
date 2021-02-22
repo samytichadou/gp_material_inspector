@@ -22,12 +22,12 @@ bl_info = {
     "name": "GP Material Inspector",
     "description": "Blender addon to inspect all available GP materials in a glimpse",
     "author": "Samy Tichadou (tonton)",
-    "version": (0, 1, 0),
+    "version": (1, 0, 0),
     "blender": (2, 91, 2),
     "location": "Sidebar > Grease Pencil > Grease Pencil Tools",
     "warning": "",
-    "doc_url": "https://github.com/samytichadou/gp_material_checker",
-    "tracker_url": "https://github.com/samytichadou/gp_material_checker/issues/new",
+    "doc_url": "https://github.com/samytichadou/gp_material_inspector",
+    "tracker_url": "https://github.com/samytichadou/gp_material_inspector/issues/new",
     "category": "Object" }
 
 import bpy
