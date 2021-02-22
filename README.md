@@ -1,2 +1,2 @@
-# Grease Pencil Material Checker addon
-Blender addon to check all available GP materials in a glimpse.
+# Grease Pencil Material Inspector addon
+Blender addon to inspect all available GP materials in a glimpse.
