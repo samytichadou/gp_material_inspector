@@ -47,36 +47,54 @@ def gpmc_draw_checker(layout, context):
         if m.is_grease_pencil:
             gp = m.grease_pencil
             
-            box = col.box()
-            
-            row = box.row(align=True)
-            row.label(text="", icon="MATERIAL")
+            # header
+            row = col.row(align=True)
+
+            if m.gpmc_show_details:
+                icon_details = "DISCLOSURE_TRI_DOWN"
+            else:
+                icon_details = "DISCLOSURE_TRI_RIGHT"
+
+            row.prop(m, "gpmc_show_details", text = "", icon=icon_details, emboss=False)
+
             row.prop(m, "name", text="")
+
+            row.prop(gp, "hide", text="", emboss=False)
             
-            row = box.row()
-            split = row.split(align=True)
-            
-            subcol1 = split.column(align=True)
-            subcol1.prop(gp, "show_stroke", text="", icon="STROKE")
-            subcol1.prop(gp, "show_fill", text="", icon="GP_SELECT_STROKES")
-            
-            subcol2 = split.column(align=True)
-            subcol2.prop(gp, "color", text="")
-            subcol2.prop(gp, "fill_color", text="")
-            
-            subcol5 = split.column(align=True)
-            subcol5.prop(gp, "mode", text="")
-            
-            subcol3 = split.column(align=True)
-            subcol3.prop(gp, "stroke_style", text="")
-            subcol3.prop(gp, "fill_style", text="")
-            
-            subcol4 = split.column(align=True)
-            subcol4.prop(gp, "use_stroke_holdout", text="", icon="HOLDOUT_ON")
-            subcol4.prop(gp, "use_fill_holdout", text="", icon="HOLDOUT_ON")
-            
-            subcol6 = split.column(align=True)
-            subcol6.prop(gp, "use_overlap_strokes", text="", icon="MOD_MASK")
+            # details
+            if not m.gpmc_show_details:
+                row.separator()
+                row.prop(gp, "show_stroke", text="", icon="STROKE")
+                row.prop(gp, "color", text="")
+                row.separator()
+                row.prop(gp, "show_fill", text="", icon="GP_SELECT_STROKES")
+                row.prop(gp, "fill_color", text="")
+
+            else:
+                row = col.row()
+                split = row.split(align=True)
+                
+                subcol1 = split.column(align=True)
+                subcol1.prop(gp, "show_stroke", text="", icon="STROKE")
+                subcol1.prop(gp, "show_fill", text="", icon="GP_SELECT_STROKES")
+                
+                subcol2 = split.column(align=True)
+                subcol2.prop(gp, "color", text="")
+                subcol2.prop(gp, "fill_color", text="")
+                
+                subcol5 = split.column(align=True)
+                subcol5.prop(gp, "mode", text="")
+                
+                subcol3 = split.column(align=True)
+                subcol3.prop(gp, "stroke_style", text="")
+                subcol3.prop(gp, "fill_style", text="")
+                
+                subcol4 = split.column(align=True)
+                subcol4.prop(gp, "use_stroke_holdout", text="", icon="HOLDOUT_ON")
+                subcol4.prop(gp, "use_fill_holdout", text="", icon="HOLDOUT_ON")
+                
+                subcol6 = split.column(align=True)
+                subcol6.prop(gp, "use_overlap_strokes", text="", icon="MOD_MASK")
 
 
 # popup operator
@@ -84,6 +102,7 @@ class GP_OT_materialchecker_popup_operator(bpy.types.Operator):
     bl_idname = "gp.popup_operator"
     bl_label = "GP Material Checker"
     bl_options = {"REGISTER"}
+    bl_description = "GP material checker popup"
  
     def invoke(self, context, event):
         return context.window_manager.invoke_props_dialog(self, width=400)
@@ -106,10 +125,7 @@ class GP_PT_material_checker(bpy.types.Panel):
     def poll(cls, context):
         return True
  
-    def draw(self, context):
-        layout = self.layout
-        
-        #layout.operator("gp.popup_operator", text="Popup")
+    def draw(self, context):       
         gpmc_draw_checker(self.layout, context)
 
 
