@@ -1,18 +1,18 @@
 import bpy
 import os
 
-from .gui import GP_PT_material_checker
+from .gui import GP_PT_material_inspector
 
 
 addon_name = os.path.basename(os.path.dirname(__file__))
 
 def update_panel(self, context):
     try:
-        bpy.utils.unregister_class(GP_PT_material_checker)
+        bpy.utils.unregister_class(GP_PT_material_inspector)
     except:
         pass
-    GP_PT_material_checker.bl_category = get_addon_preferences().category
-    bpy.utils.register_class(GP_PT_material_checker)
+    GP_PT_material_inspector.bl_category = get_addon_preferences().category
+    bpy.utils.register_class(GP_PT_material_inspector)
 
 
 class GPMI_PF_Addon_Prefs(bpy.types.AddonPreferences):

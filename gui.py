@@ -111,11 +111,11 @@ def gpmi_draw_checker(layout, context):
 
 
 # popup operator
-class GP_OT_materialchecker_popup_operator(bpy.types.Operator):
-    bl_idname = "gp.popup_operator"
-    bl_label = "GP Material Checker"
+class GP_OT_material_inspector_popup_operator(bpy.types.Operator):
+    bl_idname = "gp.material_inspector_popup"
+    bl_label = "GP Material Inspector"
     bl_options = {"REGISTER"}
-    bl_description = "GP material checker popup"
+    bl_description = "GP material inspector popup"
  
     def invoke(self, context, event):
         return context.window_manager.invoke_props_dialog(self, width=400)
@@ -128,8 +128,8 @@ class GP_OT_materialchecker_popup_operator(bpy.types.Operator):
 
 
 # panel
-class GP_PT_material_checker(bpy.types.Panel):
-    bl_label = "GP Material Checker "
+class GP_PT_material_inspector(bpy.types.Panel):
+    bl_label = "GP Material Inspector"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
     bl_category = "Grease Pencil"
@@ -145,9 +145,9 @@ class GP_PT_material_checker(bpy.types.Panel):
 ### REGISTER ---
 
 def register():
-    bpy.utils.register_class(GP_OT_materialchecker_popup_operator)
-    bpy.utils.register_class(GP_PT_material_checker)
+    bpy.utils.register_class(GP_OT_material_inspector_popup_operator)
+    bpy.utils.register_class(GP_PT_material_inspector)
 
 def unregister():
-    bpy.utils.unregister_class(GP_OT_materialchecker_popup_operator)
-    bpy.utils.unregister_class(GP_PT_material_checker)
+    bpy.utils.unregister_class(GP_OT_material_inspector_popup_operator)
+    bpy.utils.unregister_class(GP_PT_material_inspector)
