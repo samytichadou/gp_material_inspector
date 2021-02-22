@@ -19,8 +19,8 @@ Created by Samy Tichadou
 '''
 
 bl_info = {
-    "name": "GP Material Checker",
-    "description": "Blender addon to check all available GP materials in a glimpse",
+    "name": "GP Material Inspector",
+    "description": "Blender addon to inspect all available GP materials in a glimpse",
     "author": "Samy Tichadou (tonton)",
     "version": (0, 1, 0),
     "blender": (2, 91, 2),
@@ -50,10 +50,10 @@ def register():
     addon_prefs.register()
     gui.register()
 
-    bpy.types.Scene.gpmc_selected_only = \
+    bpy.types.Scene.gpmi_selected_only = \
         bpy.props.BoolProperty(name = "Selected Only", default = True)
 
-    bpy.types.Material.gpmc_show_details = \
+    bpy.types.Material.gpmi_show_details = \
         bpy.props.BoolProperty(name = "Show Details", default = False)
 
     ## update tab name with update in pref file (passing addon_prefs)
@@ -65,5 +65,5 @@ def unregister():
     addon_prefs.unregister()
     gui.unregister()
 
-    del bpy.types.Scene.gpmc_selected_only
-    del bpy.types.Material.gpmc_show_details
+    del bpy.types.Scene.gpmi_selected_only
+    del bpy.types.Material.gpmi_show_details

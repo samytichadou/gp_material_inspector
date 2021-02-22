@@ -2,7 +2,7 @@ import bpy
 
 
 # return selected object materials
-def gpmc_return_materials_from_object(object):
+def gpmi_return_materials_from_object(object):
 
     mat = []
 
@@ -15,7 +15,7 @@ def gpmc_return_materials_from_object(object):
 
 
 # return gp materials
-def gpmc_return_gp_materials():
+def gpmi_return_gp_materials():
 
     mat = []
 
@@ -29,26 +29,26 @@ def gpmc_return_gp_materials():
 
 
 # draw material
-def gpmc_draw_material(mat, container):
+def gpmi_draw_material(mat, container):
 
     gp = mat.grease_pencil
         
     # header
     row = container.row(align=True)
 
-    if mat.gpmc_show_details:
+    if mat.gpmi_show_details:
         icon_details = "DISCLOSURE_TRI_DOWN"
     else:
         icon_details = "DISCLOSURE_TRI_RIGHT"
 
-    row.prop(mat, "gpmc_show_details", text = "", icon=icon_details, emboss=False)
+    row.prop(mat, "gpmi_show_details", text = "", icon=icon_details, emboss=False)
 
     row.prop(mat, "name", text="")
 
     row.prop(gp, "hide", text="", emboss=False)
     
     # details
-    if not mat.gpmc_show_details:
+    if not mat.gpmi_show_details:
         row.separator()
         row.prop(gp, "show_stroke", text="", icon="STROKE")
         row.prop(gp, "color", text="")
@@ -84,30 +84,30 @@ def gpmc_draw_material(mat, container):
 
 
 # draw function
-def gpmc_draw_checker(layout, context):
+def gpmi_draw_checker(layout, context):
 
     scn = context.scene
-    layout.prop(scn, "gpmc_selected_only")
+    layout.prop(scn, "gpmi_selected_only")
 
     col = layout.column(align=True)
 
-    if scn.gpmc_selected_only:
+    if scn.gpmi_selected_only:
         chk_first = False
         for ob in bpy.data.objects:
             if ob.type == "GPENCIL" and ob.select_get():
-                mat = gpmc_return_materials_from_object(ob)
+                mat = gpmi_return_materials_from_object(ob)
                 if mat:
                     if chk_first:
                         col.separator()
                     col.label(text=ob.name, icon="MESH_CUBE")
                     chk_first = True
                     for m in mat:
-                        gpmc_draw_material(m, col)
+                        gpmi_draw_material(m, col)
 
     else:
-        mat = gpmc_return_gp_materials()
+        mat = gpmi_return_gp_materials()
         for m in mat:
-            gpmc_draw_material(m, col)
+            gpmi_draw_material(m, col)
 
 
 # popup operator
@@ -121,7 +121,7 @@ class GP_OT_materialchecker_popup_operator(bpy.types.Operator):
         return context.window_manager.invoke_props_dialog(self, width=400)
  
     def draw(self, context):
-        gpmc_draw_checker(self.layout, context)
+        gpmi_draw_checker(self.layout, context)
 
     def execute(self, context):
         return {'FINISHED'}
@@ -139,7 +139,7 @@ class GP_PT_material_checker(bpy.types.Panel):
         return True
  
     def draw(self, context):       
-        gpmc_draw_checker(self.layout, context)
+        gpmi_draw_checker(self.layout, context)
 
 
 ### REGISTER ---

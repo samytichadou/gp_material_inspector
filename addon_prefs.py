@@ -15,7 +15,7 @@ def update_panel(self, context):
     bpy.utils.register_class(GP_PT_material_checker)
 
 
-class GPMC_PF_Addon_Prefs(bpy.types.AddonPreferences):
+class GPMI_PF_Addon_Prefs(bpy.types.AddonPreferences):
     bl_idname = addon_name
     
     icon_toggle: bpy.props.BoolProperty(
@@ -46,7 +46,7 @@ def get_addon_preferences():
 ### REGISTER ---
 
 def register():
-    bpy.utils.register_class(GPMC_PF_Addon_Prefs)
+    bpy.utils.register_class(GPMI_PF_Addon_Prefs)
 
 def unregister():
-    bpy.utils.unregister_class(GPMC_PF_Addon_Prefs)
+    bpy.utils.unregister_class(GPMI_PF_Addon_Prefs)
