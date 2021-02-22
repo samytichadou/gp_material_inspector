@@ -44,57 +44,56 @@ def gpmc_draw_checker(layout, context):
         mat = gpmc_return_gp_materials()
         
     for m in mat:
-        if m.is_grease_pencil:
-            gp = m.grease_pencil
+        gp = m.grease_pencil
+        
+        # header
+        row = col.row(align=True)
+
+        if m.gpmc_show_details:
+            icon_details = "DISCLOSURE_TRI_DOWN"
+        else:
+            icon_details = "DISCLOSURE_TRI_RIGHT"
+
+        row.prop(m, "gpmc_show_details", text = "", icon=icon_details, emboss=False)
+
+        row.prop(m, "name", text="")
+
+        row.prop(gp, "hide", text="", emboss=False)
+        
+        # details
+        if not m.gpmc_show_details:
+            row.separator()
+            row.prop(gp, "show_stroke", text="", icon="STROKE")
+            row.prop(gp, "color", text="")
+            row.separator()
+            row.prop(gp, "show_fill", text="", icon="GP_SELECT_STROKES")
+            row.prop(gp, "fill_color", text="")
+
+        else:
+            row = col.row()
+            split = row.split(align=True)
             
-            # header
-            row = col.row(align=True)
-
-            if m.gpmc_show_details:
-                icon_details = "DISCLOSURE_TRI_DOWN"
-            else:
-                icon_details = "DISCLOSURE_TRI_RIGHT"
-
-            row.prop(m, "gpmc_show_details", text = "", icon=icon_details, emboss=False)
-
-            row.prop(m, "name", text="")
-
-            row.prop(gp, "hide", text="", emboss=False)
+            subcol1 = split.column(align=True)
+            subcol1.prop(gp, "show_stroke", text="", icon="STROKE")
+            subcol1.prop(gp, "show_fill", text="", icon="GP_SELECT_STROKES")
             
-            # details
-            if not m.gpmc_show_details:
-                row.separator()
-                row.prop(gp, "show_stroke", text="", icon="STROKE")
-                row.prop(gp, "color", text="")
-                row.separator()
-                row.prop(gp, "show_fill", text="", icon="GP_SELECT_STROKES")
-                row.prop(gp, "fill_color", text="")
-
-            else:
-                row = col.row()
-                split = row.split(align=True)
-                
-                subcol1 = split.column(align=True)
-                subcol1.prop(gp, "show_stroke", text="", icon="STROKE")
-                subcol1.prop(gp, "show_fill", text="", icon="GP_SELECT_STROKES")
-                
-                subcol2 = split.column(align=True)
-                subcol2.prop(gp, "color", text="")
-                subcol2.prop(gp, "fill_color", text="")
-                
-                subcol5 = split.column(align=True)
-                subcol5.prop(gp, "mode", text="")
-                
-                subcol3 = split.column(align=True)
-                subcol3.prop(gp, "stroke_style", text="")
-                subcol3.prop(gp, "fill_style", text="")
-                
-                subcol4 = split.column(align=True)
-                subcol4.prop(gp, "use_stroke_holdout", text="", icon="HOLDOUT_ON")
-                subcol4.prop(gp, "use_fill_holdout", text="", icon="HOLDOUT_ON")
-                
-                subcol6 = split.column(align=True)
-                subcol6.prop(gp, "use_overlap_strokes", text="", icon="MOD_MASK")
+            subcol2 = split.column(align=True)
+            subcol2.prop(gp, "color", text="")
+            subcol2.prop(gp, "fill_color", text="")
+            
+            subcol5 = split.column(align=True)
+            subcol5.prop(gp, "mode", text="")
+            
+            subcol3 = split.column(align=True)
+            subcol3.prop(gp, "stroke_style", text="")
+            subcol3.prop(gp, "fill_style", text="")
+            
+            subcol4 = split.column(align=True)
+            subcol4.prop(gp, "use_stroke_holdout", text="", icon="HOLDOUT_ON")
+            subcol4.prop(gp, "use_fill_holdout", text="", icon="HOLDOUT_ON")
+            
+            subcol6 = split.column(align=True)
+            subcol6.prop(gp, "use_overlap_strokes", text="", icon="MOD_MASK")
 
 
 # popup operator
