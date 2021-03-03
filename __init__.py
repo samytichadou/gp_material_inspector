@@ -24,7 +24,7 @@ bl_info = {
     "author": "Samy Tichadou (tonton)",
     "version": (1, 0, 0),
     "blender": (2, 91, 2),
-    "location": "Sidebar > Grease Pencil > Grease Pencil Tools",
+    "location": "Sidebar > Grease Pencil > GP Material Inspector",
     "warning": "",
     "doc_url": "https://github.com/samytichadou/gp_material_inspector",
     "tracker_url": "https://github.com/samytichadou/gp_material_inspector/issues/new",
